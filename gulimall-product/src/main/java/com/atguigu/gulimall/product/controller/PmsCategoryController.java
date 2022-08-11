@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,14 @@ public class PmsCategoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/tree")
     //@RequiresPermissions("product:pmscategory:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = pmsCategoryService.queryPage(params);
+    public R list(){
 
-        return R.ok().put("page", page);
+        List<PmsCategoryEntity> entities = pmsCategoryService.listWithTree();
+
+
+        return R.ok().put("data", entities);
     }
 
 
